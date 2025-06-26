@@ -36,7 +36,13 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        $todo = Todo::create($request->all());
+        $todo = new Todo;
+        $todo->name = $request->name;
+        $todo->description = $request->description;
+        $todo->start_date = $request->start_date;
+        $todo->end_date = $request->end_date;
+        $todo->priority = $request->priority;
+        $todo->is_done = $request->is_done;
 
         $todo->save();
     }
@@ -82,8 +88,9 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($todo)
     {
-        //
+        $del = Todo::find($todo);
+        return $del->delete();
     }
 }

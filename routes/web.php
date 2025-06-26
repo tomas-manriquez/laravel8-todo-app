@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::prefix('task')->name('task.')->group(function(){
+    Route::get('/', [TaskController::class,'index'])->name('index');
+    Route::get('/create', [TaskController::class,'create'])->name('create');
+    Route::get('/{id}', [TaskController::class,'show'])->name('show');
+    Route::get('/{id}/edit', [TaskController::class,'edit'])->name('edit');
+});
