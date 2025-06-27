@@ -15,11 +15,11 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->timestamp('start_date')->nullable()->useCurrent();
             $table->timestamp('end_date')->nullable();
-            $table->integer('priority');
+            $table->integer('priority')->default(0);
             $table->boolean('is_done')->default(false);
             $table->timestamps();
         });

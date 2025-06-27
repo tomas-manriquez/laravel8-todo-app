@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Todo extends Model
 {
+    use HasFactory;
     protected $casts = [
         'start_date' => 'datetime:d-m-Y',
         'end_date' => 'datetime:d-m-Y',
