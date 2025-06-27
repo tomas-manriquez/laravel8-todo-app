@@ -155,3 +155,10 @@ onMounted(fetchTodo)
     </tbody>
   </table>
 </template>
+
+<style scoped>
+
+.form{
+  display:"flex"
+}
+</style>
