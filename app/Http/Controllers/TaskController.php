@@ -16,7 +16,7 @@ class TaskController extends Controller
                     'id' => $todo->id,
                     'name' => $todo->name,
                     'description' => $todo->description,
-                    'start_date' => $todo->start_date,
+                    'start_date' => $todo->end_date,
                     'end_date' => $todo->end_date,
                     'priority' => $todo->priority,
                     'is_done' => $todo->is_done,
@@ -27,4 +27,18 @@ class TaskController extends Controller
         ]
     );
     }
+    public function create(Request $request)
+    {
+        return Inertia::render('Task/Store', [
+            'todo' => $request->only(
+              'name',
+              'description',
+              'start_date',
+              'end_date',
+              'priority',
+              'is_done',
+            ),'index_url' => route('task.index')
+        ]);
+    }
+
 }
