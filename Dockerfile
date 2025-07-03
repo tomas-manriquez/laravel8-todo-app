@@ -1,5 +1,6 @@
 # Use PHP with Apache as the base image
 FROM php:8.2-apache AS web
+FROM node:11
 
 # Install Additional System Dependencies
 RUN apt-get update && apt-get install -y \
@@ -29,6 +30,17 @@ WORKDIR /var/www/html
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+#Added: install dependencies for inertia/breeze
+RUN composer require laravel/breeze:1.9.2
+RUN php artisan breeze:install
+RUN npm install \
+npm run dev \
+php artisan migrate
+RUN php artisan breeze:install vue
+RUN composer require inertiajs/inertia-laravel
+RUN composer require tightenco/ziggy
+RUN php artisan inertia:middleware
 
 # Install project dependencies
 RUN composer install
